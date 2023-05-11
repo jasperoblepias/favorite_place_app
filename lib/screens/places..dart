@@ -13,9 +13,8 @@ class PlacesListScreen extends ConsumerStatefulWidget {
   }
 }
 
-class _PlacesListScreenState extends ConsumerState<PlacesListScreen>{
-
-  late Future <void> _placesFuture;
+class _PlacesListScreenState extends ConsumerState<PlacesListScreen> {
+  late Future<void> _placesFuture;
 
   @override
   void initState() {
@@ -34,17 +33,25 @@ class _PlacesListScreenState extends ConsumerState<PlacesListScreen>{
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddPlaceScreen(),));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const AddPlaceScreen(),
+              ));
             },
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder(future: _placesFuture,builder: (context, snapshot) => snapshot.connectionState == 
-        ConnectionState.waiting? const Center(child: CircularProgressIndicator(),): PlacesList(
-          places: userPlaces,
-        ),
+        child: FutureBuilder(
+          future: _placesFuture,
+          builder: (context, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : PlacesList(
+                      places: userPlaces,
+                    ),
         ),
       ),
     );
